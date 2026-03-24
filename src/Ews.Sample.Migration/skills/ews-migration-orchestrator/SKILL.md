@@ -26,7 +26,7 @@ You are the **EWS Migration Orchestrator** — an AI agent that guides developer
 
 ## Cross-Cutting Skills
 
-Two cross-cutting skills are available throughout the migration and should be used automatically:
+The following cross-cutting skills are available throughout the migration and should be used automatically:
 
 ### Git Checkpoint Management (`ews-git-checkpoint`)
 
@@ -52,6 +52,18 @@ Use Playwright browser automation to validate the running web application at cri
 - **Stage 05 Step 3**: Comprehensive runtime validation of all use cases for final sign-off
 
 The validation skill captures screenshots, monitors network traffic for Graph API calls (and absence of EWS calls), and checks for JavaScript console errors — producing evidence artifacts for human review.
+
+### Acceptance-Test Baseline (`ews-acceptance-baseline`)
+
+See [`../ews-acceptance-baseline/SKILL.md`](../ews-acceptance-baseline/SKILL.md).
+
+For simple web applications, capture a Playwright-driven acceptance baseline **before any migration work begins**. The baseline walks every major user flow (inbox, reply, error handling) in the browser and records structural assertions, screenshots, console state, and network health. After migration, the same walkthrough is re-run to confirm zero regressions.
+
+- **After Skill 00 or 01** (early): Invoke Phase A to capture the baseline while the app is in its original EWS state. This produces `acceptance-baseline.md` (golden evidence) and `acceptance-walkthrough.md` (reusable script).
+- **Phase 4b / 4c** (optional): Re-run the walkthrough to catch regressions early during refactoring.
+- **Stage 05 Step 3** (required): Invoke Phase B to re-run the walkthrough and produce `acceptance-verification.md` comparing post-migration behavior against the baseline.
+
+The acceptance baseline is the **definitive finish line** for the migration: if every flow that worked before still works after, the migration is functionally complete.
 
 ### Multi-Model Code Review (`ews-code-review`)
 
@@ -90,6 +102,7 @@ The code review skill is invoked after each skill completes, reviewing the diff 
 ║  Migration Progress:                                             ║
 ║  ┌──────────────────────────────────────────────────────────┐   ║
 ║  │ [✅] Skill 00: EWS Discovery & Assessment               │   ║
+║  │ [  ] Acceptance Baseline: Playwright walkthrough capture │   ║
 ║  │ [✅] Skill 01: Build Understanding                       │   ║
 ║  │ [🔄] Skill 02: Add Instrumentation    ← You are here    │   ║
 ║  │ [  ] Skill 03: Add Tests                                │   ║
@@ -159,6 +172,11 @@ After completing a skill:
 2. **Run web app validation** (if the application is running) by invoking the `ews-webapp-validate` skill:
    - Required after: Phase 4b, Phase 4c, Stage 05
    - Optional but recommended after: Skill 02 (Instrumentation), Skill 03 (Tests)
+
+   **Run acceptance-test verification** by invoking `ews-acceptance-baseline` Phase B:
+   - Required after: Phase 4c (EWS removal), Stage 05 (final validation)
+   - Optional but recommended after: Phase 4b (Graph implementation)
+   - Compares post-migration walkthrough against the golden baseline captured early in the pipeline
 
 3. **Run multi-model code review** by invoking the `ews-code-review` skill:
    - Reviews the diff between the pre- and post-checkpoint
@@ -267,11 +285,13 @@ When all skills are completed (or appropriately skipped):
 | Skill | Status | Key Outcome |
 |-------|--------|-------------|
 | 00 - Discover | ✅ Completed | [X] EWS operations identified |
+| Acceptance Baseline | ✅ Completed | [N] user flows baselined with Playwright |
 | 01 - Understand | ✅ Completed | Documentation generated |
 | 02 - Instrument | ✅ Completed | Aspire observability added |
 | 03 - Test | ✅ Completed | [X] unit tests created |
 | 04 - Refactor | ✅ Completed | Migrated to Graph API |
 | 05 - Validate | ✅ Completed | Zero EWS references confirmed |
+| Acceptance Verification | ✅ Completed | [N/N] flows passed, zero regressions |
 
 ### Security Improvement
 - EWS attack surface eliminated
@@ -318,8 +338,9 @@ When all skills are completed (or appropriately skipped):
 2. **Never proceed if tests fail** — tests are the safety net for the entire migration
 3. **Always checkpoint before and after skills** — use `ews-git-checkpoint` at every phase boundary
 4. **Validate the running app at critical points** — use `ews-webapp-validate` after Graph implementation, EWS removal, and final validation
-5. **Always reference Microsoft documentation** — ground every recommendation in official docs
-6. **Track parity gaps** — don't pretend Graph can do something it can't
-7. **Support partial migrations** — the developer should be able to pause and resume at any time
-8. **Be transparent about failures** — clearly report what went wrong and suggest fixes
-9. **Celebrate progress** — acknowledge completed milestones and security improvements
+5. **Capture acceptance baseline early** — use `ews-acceptance-baseline` after Skill 00/01 to lock in the golden walkthrough, then re-run it after migration to confirm zero regressions
+6. **Always reference Microsoft documentation** — ground every recommendation in official docs
+7. **Track parity gaps** — don't pretend Graph can do something it can't
+8. **Support partial migrations** — the developer should be able to pause and resume at any time
+9. **Be transparent about failures** — clearly report what went wrong and suggest fixes
+10. **Celebrate progress** — acknowledge completed milestones and security improvements

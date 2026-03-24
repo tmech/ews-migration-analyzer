@@ -43,6 +43,7 @@ Each skill follows the [agentskills.io specification](https://agentskills.io/spe
 | [Refactor & Migrate to Graph API](./skills/ews-refactor/SKILL.md) | `ews-refactor/` | 04 | Extract service layer, implement Graph API, validate, and remove EWS (3 sub-phases) | High |
 | [Final Validation & Documentation](./skills/ews-validate/SKILL.md) | `ews-validate/` | 05 | Post-migration validation, documentation update, and completion report | Low |
 | [Web App Validation](./skills/ews-webapp-validate/SKILL.md) | `ews-webapp-validate/` | Cross-cutting | Playwright browser automation to validate the running web app at critical migration points | Medium |
+| [Acceptance-Test Baseline](./skills/ews-acceptance-baseline/SKILL.md) | `ews-acceptance-baseline/` | Cross-cutting | Capture a Playwright acceptance baseline before migration; re-run after migration to confirm zero regressions | Medium |
 | [Git Checkpoint Management](./skills/ews-git-checkpoint/SKILL.md) | `ews-git-checkpoint/` | Cross-cutting | Create, list, compare, and revert named git checkpoints for safe experimentation | Low |
 | [Multi-Model Code Review](./skills/ews-code-review/SKILL.md) | `ews-code-review/` | Cross-cutting | Reviews commits with 3 AI models in parallel, synthesizes findings by consensus | Low |
 | [Architecture Modernization](./skills/ews-architect/SKILL.md) | `ews-architect/` | Cross-cutting | Modernize app architecture for observability, maintainability, and testability with Clean Architecture, OpenTelemetry, health checks, Result pattern, and integration tests | Medium |
@@ -101,6 +102,9 @@ skills/
 │       └── migration-report-template.md
 ├── ews-webapp-validate/              # Cross-cutting
 │   ├── SKILL.md                      # Playwright browser validation
+│   └── references/REFERENCE.md
+├── ews-acceptance-baseline/           # Cross-cutting
+│   ├── SKILL.md                      # Baseline capture & post-migration verification
 │   └── references/REFERENCE.md
 ├── ews-git-checkpoint/               # Cross-cutting
 │   ├── SKILL.md                      # Git checkpoint management

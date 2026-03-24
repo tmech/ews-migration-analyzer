@@ -58,13 +58,29 @@ dotnet test --verbosity normal
 
 ### Step 3: Runtime Validation
 
-Start the application under Aspire and manually verify all use cases from requirements.md:
+Start the application under Aspire and validate all use cases — both via Aspire telemetry and the Playwright acceptance baseline.
+
+#### 3a: Acceptance-Test Verification (Automated)
+
+If an acceptance baseline was captured earlier (via `ews-acceptance-baseline` Phase A), **re-run the walkthrough now**:
+
+1. Invoke the `ews-acceptance-baseline` skill (Phase B — Verify Post-Migration)
+2. The skill re-executes every flow from `acceptance-walkthrough.md` against the running migrated app
+3. It compares structural assertions, console state, and network health against `acceptance-baseline.md`
+4. It produces `acceptance-verification.md` with a flow-by-flow comparison
+5. It confirms Graph API calls are present and EWS calls are absent in network traffic
+
+If no baseline was captured earlier, invoke Phase A now to at least validate the current app behavior and establish a record.
+
+#### 3b: Use Case Verification
 
 For each use case documented in requirements.md:
 
 - [ ] **UC-1**: [Use case name] — Verify via Graph API
 - [ ] **UC-2**: [Use case name] — Verify via Graph API
 - [ ] ... (enumerate all)
+
+#### 3c: Aspire Dashboard Verification
 
 Check Aspire dashboard:
 
@@ -141,6 +157,7 @@ Guide the admin to disable EWS for the migrated application:
 - [ ] EWS Code Analyzer reports zero diagnostics
 - [ ] Full test suite passes (all tests green)
 - [ ] All use cases verified working via Graph API
+- [ ] Acceptance-test walkthrough passes with zero regressions vs baseline (if baseline was captured)
 - [ ] requirements.md updated to reflect Graph API
 - [ ] README.md updated with new architecture
 - [ ] copilot-instructions.md updated for Graph-based development
