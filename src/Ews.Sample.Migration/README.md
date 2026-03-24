@@ -45,6 +45,7 @@ Each skill follows the [agentskills.io specification](https://agentskills.io/spe
 | [Web App Validation](./skills/ews-webapp-validate/SKILL.md) | `ews-webapp-validate/` | Cross-cutting | Playwright browser automation to validate the running web app at critical migration points | Medium |
 | [Git Checkpoint Management](./skills/ews-git-checkpoint/SKILL.md) | `ews-git-checkpoint/` | Cross-cutting | Create, list, compare, and revert named git checkpoints for safe experimentation | Low |
 | [Multi-Model Code Review](./skills/ews-code-review/SKILL.md) | `ews-code-review/` | Cross-cutting | Reviews commits with 3 AI models in parallel, synthesizes findings by consensus | Low |
+| [Architecture Modernization](./skills/ews-architect/SKILL.md) | `ews-architect/` | Cross-cutting | Modernize app architecture for observability, maintainability, and testability with Clean Architecture, OpenTelemetry, health checks, Result pattern, and integration tests | Medium |
 
 ### Orchestration Agent
 
@@ -106,6 +107,9 @@ skills/
 │   └── references/REFERENCE.md
 ├── ews-code-review/                  # Cross-cutting
 │   ├── SKILL.md                      # Multi-model code review
+│   └── references/REFERENCE.md
+├── ews-architect/                    # Cross-cutting
+│   ├── SKILL.md                      # Architecture modernization
 │   └── references/REFERENCE.md
 └── ews-migration-orchestrator/       # Orchestrator
     ├── SKILL.md
