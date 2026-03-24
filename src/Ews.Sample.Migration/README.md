@@ -42,6 +42,8 @@ Each skill follows the [agentskills.io specification](https://agentskills.io/spe
 | [Add Tests](./skills/ews-test/SKILL.md) | `ews-test/` | 03 | Generate xUnit/NSubstitute unit tests as a safety net for refactoring | Medium |
 | [Refactor & Migrate to Graph API](./skills/ews-refactor/SKILL.md) | `ews-refactor/` | 04 | Extract service layer, implement Graph API, validate, and remove EWS (3 sub-phases) | High |
 | [Final Validation & Documentation](./skills/ews-validate/SKILL.md) | `ews-validate/` | 05 | Post-migration validation, documentation update, and completion report | Low |
+| [Web App Validation](./skills/ews-webapp-validate/SKILL.md) | `ews-webapp-validate/` | Cross-cutting | Playwright browser automation to validate the running web app at critical migration points | Medium |
+| [Git Checkpoint Management](./skills/ews-git-checkpoint/SKILL.md) | `ews-git-checkpoint/` | Cross-cutting | Create, list, compare, and revert named git checkpoints for safe experimentation | Low |
 
 ### Orchestration Agent
 
@@ -95,6 +97,12 @@ skills/
 │   └── references/
 │       ├── REFERENCE.md
 │       └── migration-report-template.md
+├── ews-webapp-validate/              # Cross-cutting
+│   ├── SKILL.md                      # Playwright browser validation
+│   └── references/REFERENCE.md
+├── ews-git-checkpoint/               # Cross-cutting
+│   ├── SKILL.md                      # Git checkpoint management
+│   └── references/REFERENCE.md
 └── ews-migration-orchestrator/       # Orchestrator
     ├── SKILL.md
     └── references/REFERENCE.md
