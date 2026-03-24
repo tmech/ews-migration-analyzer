@@ -24,6 +24,7 @@
         "./src/Ews.Sample.Migration/skills/ews-validate",
         "./src/Ews.Sample.Migration/skills/ews-webapp-validate",
         "./src/Ews.Sample.Migration/skills/ews-git-checkpoint",
+        "./src/Ews.Sample.Migration/skills/ews-code-review",
         "./src/Ews.Sample.Migration/skills/ews-migration-orchestrator"
       ]
     }

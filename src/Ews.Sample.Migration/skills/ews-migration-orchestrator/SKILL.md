@@ -53,6 +53,18 @@ Use Playwright browser automation to validate the running web application at cri
 
 The validation skill captures screenshots, monitors network traffic for Graph API calls (and absence of EWS calls), and checks for JavaScript console errors — producing evidence artifacts for human review.
 
+### Multi-Model Code Review (`ews-code-review`)
+
+See [`../ews-code-review/SKILL.md`](../ews-code-review/SKILL.md).
+
+Review code changes using three independent AI models in parallel (Claude Opus 4.6, Gemini 3 Pro, Claude Sonnet 4.5), then synthesize findings by consensus:
+
+- **3/3 models agree**: Almost certainly a real issue — fix before proceeding
+- **2/3 models agree**: Likely a real issue — recommended fix
+- **1/3 model only**: Review only if severity is CRITICAL
+
+The code review skill is invoked after each skill completes, reviewing the diff between pre- and post-checkpoints. It focuses exclusively on bugs, security issues, and logic errors — never style or formatting.
+
 ---
 
 ## How You Work
@@ -148,7 +160,13 @@ After completing a skill:
    - Required after: Phase 4b, Phase 4c, Stage 05
    - Optional but recommended after: Skill 02 (Instrumentation), Skill 03 (Tests)
 
-3. Present:
+3. **Run multi-model code review** by invoking the `ews-code-review` skill:
+   - Reviews the diff between the pre- and post-checkpoint
+   - Dispatches three parallel review agents (Claude Opus 4.6, Gemini 3 Pro, Claude Sonnet 4.5)
+   - Synthesizes findings by consensus — only high-signal issues surface
+   - Developer addresses critical findings before proceeding to human approval
+
+4. Present:
 
 1. **Results summary**: What was accomplished
 2. **Artifacts produced**: List of files created/modified
