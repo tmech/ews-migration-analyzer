@@ -21,24 +21,53 @@ It is recommended to create the client secret with a short expiration time that 
 
 The notebook to collect the usage data is configured to use a Client Secret credential but the calls to `Scripts/Find-EwsUsage.ps1` can be modified to use different authentication methods.
 
-### Update appSettings.json
+### Set environment variables for credentials
 
-Copy the Tenant ID, Application ID and Client Secret from the app registration you created or reused into the `appSettings.json` file. We recommend leaving the `OutputPath` settings because the Power BI report is configured to look for a data file there. The file should look like this:
+For better secret hygiene, store Tenant ID, Application ID and Client Secret in environment variables instead of writing secrets to `appSettings.json`.
+
+The notebook expects these variables:
+
+- `EWS_USAGE_TENANT_ID`
+- `EWS_USAGE_AUDIT_APP_ID`
+- `EWS_USAGE_AUDIT_APP_SECRET`
+
+You can keep `appSettings.json` for non-secret settings such as `OutputPath`. Example:
 
 ```json
 {
-  "TenantId": "<tenant-id>",
-  "ClientId": "<client-id>",
-  "ClientSecret": "<client-secret>",
   "OutputPath": ".\\Usage-Data"
 }
 ```
+
+### Optional: Create the app registration automatically
+
+You can create a new app registration, assign the required Microsoft Graph application permissions, create a client secret, and set the required environment variables in one step:
+
+```powershell
+pwsh .\Scripts\New-EwsUsageAuditApp.ps1
+```
+
+Prerequisites:
+
+- Azure CLI installed and authenticated (`az login --allow-no-subscriptions`)
+- Permission to create app registrations and grant admin consent in your tenant
+
+If you are not already signed in, the script checks Azure CLI login state and offers to run `az login --allow-no-subscriptions` for you.
+
+Useful options:
+
+- `-AppDisplayName "Contoso EWS Usage Audit"`
+- `-TenantId "<your-tenant-guid>"`
+- `-SecretLifetimeDays 30`
+- `-EnvironmentVariableScope User` (default) or `-EnvironmentVariableScope Process`
+- `-ForceOverwriteEnvironmentVariables` (replace existing values)
+- `-SkipAdminConsent` (if you need an admin to grant consent later)
 
 ## Run the Reports
 
 There are two parts to the report generation:
 
-1. **Collect EWS usage data**: This is done by running the `Collect-EWS-App-Usage.ipynb` notebook. It will collect the EWS usage data and save it to the OutputPath specified in the `appSettings.json` file.
+1. **Collect EWS usage data**: This is done by running the `Collect-EWS-App-Usage.ipynb` notebook. It reads credentials from environment variables and saves the output to the `OutputPath` setting from `appSettings.json` (or defaults to `.\\Usage-Data`).
 
 2. **Generate the reports**: This is done by running the `Report-EWS-App-Usage.ipynb` notebook. It will read the data collected in the previous step aggregate it and display the results within the notebook and update the `EWS-Usage.csv` file used by the Power BI report `EWS-Usage.pbix`.
 
