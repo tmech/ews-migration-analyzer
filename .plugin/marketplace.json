@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Copilot skills for migrating Exchange Web Services (EWS) applications to Microsoft Graph API",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "documentation_hub": "https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online"
   },
   "plugins": [
@@ -16,18 +16,18 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./src/Ews.Sample.Migration/skills/ews-discover",
-        "./src/Ews.Sample.Migration/skills/ews-understand",
-        "./src/Ews.Sample.Migration/skills/ews-instrument",
-        "./src/Ews.Sample.Migration/skills/ews-test",
-        "./src/Ews.Sample.Migration/skills/ews-refactor",
-        "./src/Ews.Sample.Migration/skills/ews-validate",
-        "./src/Ews.Sample.Migration/skills/ews-webapp-validate",
-        "./src/Ews.Sample.Migration/skills/ews-acceptance-baseline",
-        "./src/Ews.Sample.Migration/skills/ews-git-checkpoint",
-        "./src/Ews.Sample.Migration/skills/ews-code-review",
-        "./src/Ews.Sample.Migration/skills/ews-architect",
-        "./src/Ews.Sample.Migration/skills/ews-migration-orchestrator"
+        "./.github/skills/ews-discover",
+        "./.github/skills/ews-understand",
+        "./.github/skills/ews-instrument",
+        "./.github/skills/ews-test",
+        "./.github/skills/ews-refactor",
+        "./.github/skills/ews-validate",
+        "./.github/skills/ews-webapp-validate",
+        "./.github/skills/ews-acceptance-baseline",
+        "./.github/skills/ews-git-checkpoint",
+        "./.github/skills/ews-code-review",
+        "./.github/skills/ews-architect",
+        "./.github/skills/ews-migration-orchestrator"
       ]
     },
     {
@@ -36,13 +36,13 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./src/Ews.App.Usage/skills/ews-usage-orchestrator",
-        "./src/Ews.App.Usage/skills/ews-usage-setup",
-        "./src/Ews.App.Usage/skills/ews-usage-collect",
-        "./src/Ews.App.Usage/skills/ews-usage-report",
-        "./src/Ews.App.Usage/skills/ews-usage-open-excel",
-        "./src/Ews.App.Usage/skills/ews-usage-open-powerbi",
-        "./src/Ews.App.Usage/skills/ews-usage-admin-reports"
+        "./.github/skills/ews-usage-orchestrator",
+        "./.github/skills/ews-usage-setup",
+        "./.github/skills/ews-usage-collect",
+        "./.github/skills/ews-usage-report",
+        "./.github/skills/ews-usage-open-excel",
+        "./.github/skills/ews-usage-open-powerbi",
+        "./.github/skills/ews-usage-admin-reports"
       ]
     }
   ]
