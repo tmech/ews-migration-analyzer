@@ -32,7 +32,7 @@
     },
     {
       "name": "ews-app-usage",
-      "description": "Guides tenant admins through EWS usage data collection, analysis, and reporting. Orchestrates app registration setup, data collection via Graph API, report generation, and provides quick-launch access to Excel, Power BI, and M365 Admin Center reports.",
+      "description": "Guides tenant admins through EWS usage data collection for a single tenant, analysis, and reporting. Orchestrates app registration setup, data collection via Graph API, report generation, and provides quick-launch access to Excel, Power BI, and M365 Admin Center reports.",
       "source": "./",
       "strict": false,
       "skills": [
