@@ -29,6 +29,21 @@
         "./src/Ews.Sample.Migration/skills/ews-architect",
         "./src/Ews.Sample.Migration/skills/ews-migration-orchestrator"
       ]
+    },
+    {
+      "name": "ews-app-usage",
+      "description": "Guides tenant admins through EWS usage data collection, analysis, and reporting. Orchestrates app registration setup, data collection via Graph API, report generation, and provides quick-launch access to Excel, Power BI, and M365 Admin Center reports.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./src/Ews.App.Usage/skills/ews-usage-orchestrator",
+        "./src/Ews.App.Usage/skills/ews-usage-setup",
+        "./src/Ews.App.Usage/skills/ews-usage-collect",
+        "./src/Ews.App.Usage/skills/ews-usage-report",
+        "./src/Ews.App.Usage/skills/ews-usage-open-excel",
+        "./src/Ews.App.Usage/skills/ews-usage-open-powerbi",
+        "./src/Ews.App.Usage/skills/ews-usage-admin-reports"
+      ]
     }
   ]
 }
