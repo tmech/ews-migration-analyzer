@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Copilot skills for migrating Exchange Web Services (EWS) applications to Microsoft Graph API",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "documentation_hub": "https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/deprecation-of-ews-exchange-online"
   },
   "plugins": [
